@@ -17,7 +17,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @SpringBootConfiguration
 public class ApplicationConfig {
     /**
-     * 原生的RedisTemplate使用的序列化组件为java原生序列化器,存储到redis后可读性差,存储量大,存储效率低
+     * 原生的RedisTemplate使用的序列化组件为java原生序列化器,存储到redis后可读性差,耗费存储空间
+     * 定制化虽然可以正确存储数据,但是会带有序列化对象标识,依然耗费存储空间,推荐使用Spring原生
+     * StringRedisTemplate(其实就是将key和value的序列化器全部定制成StringRedisSerializer.UTF_8),
+     * 不过使用StringRedisTemplate需要手动完成对象的序列化和反序列化
      * @param connectionFactory
      * @return
      */
